@@ -1,0 +1,59 @@
+
+\section{Browser-based Anti-Phishing}
+\label{s:browser-based}
+Due to browsers' strategic position and scale, they play a significant role in defending users' security against phishing attacks~\cite{ma2009beyond}. Many modern web browsers -like Chrome and Microsoft Edge- provide built-in detection tools to protect users against phishing attacks on desktop and mobile platforms. For most industrial browsers these native anti-phishing tools include two type of protecting layer: (1) blacklist(reactive) (2) client-side heuristic(proactive).
+Table \ref{tab:Browsers anti-phishing settings} shows the anti-phishing methods deployed in the major web browsers.
+%  Table \ref{tab:Browsers anti-phishing settings} shows the anti-phishing mechanism used in the different modern web browsers.
+The browser-side classifier use the ML-based trained approach to analyze the websites that user visits~\cite{liang2016cracking}. As a result, if the classifier suspects that a website is malicious the browser shows warning page to the user.
+Anti-phishing blacklists that are natively implemented in modern web browsers are managed by different service providers. Google Safe Browsing (GSB) maintains blacklists for Chrome, Safari, Firefox, and Chromium~\cite{safebrowsing}.
+By global browser market share as of December 2020, GSB is the most affecting blacklist as it protects approximately 80.60\%  of desktop users and 89.82\%  of mobile users~\cite{statcounterall,browsermarketshare}. We perform our empirical study on chrome browser due to the fact that Google Chrome accounted for 70.33\%  of overall desktop web browser, and 63.28\%  of mobile web browser market share in the world. We focus on evaluating the content-based anti-phishing mechanisim for chrome browser to address this system shortcomings to protect around 3 billion users worldwide~\cite{statcounterdesktop,statcountermobile}.
+However, Google Safe Browsing introduced another anti-phishing mechanism called ``Real-Time". When user visits a website, chrome checks the URL against the local lists of thousands of trusted websites. If the URL does not match on the local whitelist, chrome checks the URL with google to evaluate the website's phishy-ness~\cite{googlechromeprivacywhitepaper}. Chrome also is the only browser that warns users when accessing sites with provides an additional ``look-alike URL"~\cite{cimpanu_2019}.
+Table \ref{tab: Chrome Security levels} shows chrome browser's anti-phishing layers.
+Chrome provides Three different levels of security: (1) no protection, (2) standard protection, and (3) advanced protection.
+
+In this work, we investigate the protection level of these three layers along with their security policies.
+Standard protection is the default setting for the chrome browser.
+
+% \subsection{Chromium Vs Chrome}
+% Chromium is the open-source project behind the google chrome browser. Although Google also adds a number of proprietary features to Chrome, google safe browsing is the same in both chrome and chromium browsers~\cite{the-chromium-projects}. Therefore, we study the GSB source in chromium to analyze the client-side classifier, since it is an open-source project. We deployed the chrome browser in the real-world experiment to evaluate the blacklisting performance. Our study released the main shortcoming of safe browsing during chromium source code analysis. These findings affect other Chromium-based browsers like  Edge version 84.
+
+\begin{table}[]
+\centering
+\begin{tabular}{p{3.58cm}cccc} 
+\hline
+\toprule
+\small{Security Level}                & \rotatebox[origin=c]{90}{\centering\small{Blacklist}} & \rotatebox[origin=c]{90}{\centering\small\pbox{2cm}{Content-based\\ Anti-phishing}} & \rotatebox[origin=c]{90}{\centering\small\pbox{2cm}{Password-\\protection}} &
+\rotatebox[origin=c]{90}{\centering\small\pbox{2cm}{Real-time \\Anti-phishing}}
+  \\ 
+\hline
+\small{No Protection}                 & \cmark         & \xmark                           & \xmark                   & \xmark                        \\
+\small{Standard Protection} \footnotesize{(Default)} & \cmark         & \cmark                           & \cmark                   & \xmark                        \\
+\small{Advanced Protection}           & \cmark         & \cmark                           & \cmark                   & \cmark                        \\
+\bottomrule
+\end{tabular}
+\caption{Chrome security levels}
+\label{tab: Chrome Security levels}
+\end{table}
+ 
+\begin{table}
+\centering
+\begin{tabular}{cccccc} 
+\hline
+\toprule
+\multirow{2}{*}{\small{Browser}} & \multirow{2}{*}{\small{API}} & \multicolumn{3}{c}{\small{Anti-phishing Methods}}            & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}\small{Default} \\\small{Enabled} \\\small{Settings} \end{tabular}}  \\ 
+\cline{3-5}
+                         &                      & \rotatebox[origin=c]{90}{\small\pbox{3cm}{Blacklist\\ \centering(BL)}} & \rotatebox[origin=c]{90}{\small\pbox{3cm}{Content-\\based\\\centering{ (CB)}}} & \rotatebox[origin=c]{90}{\small\pbox{3cm}{Real-time\\ \centering(RT)}} &                                                                                         \\ 
+\hline
+\small{Chrome}                   & \multirow{3}{*}{\small{GSB}} & \cmark              & \cmark                  & \cmark              & \small{BL,CB}                                                                                      \\
+\small{Firefox}                  &                      & \cmark              & \cmark                  & \xmark              & \small{BL, CB}                                                                                  \\
+\small{Safari}                   &                      & \cmark              & \xmark                  & \xmark              & \small{BL}                                                                                      \\
+\cline{1-2}\small{Edge}                     & \multirow{2}{*}{\small{MSS}} & \cmark              & \cmark                  & \xmark              & \small{BL, CB}                                                                                  \\
+\small{IE}                       &                      & \cmark              & \cmark                  & \xmark              & \small{BL, CB}                                                                                  \\
+\cline{1-2}
+\small{Opera}                    & \small{Opera}                & \cmark              & \cmark                  & \xmark              & \small{BL}                                                                                      \\
+\bottomrule
+\end{tabular}
+\caption{The modern browsers anti-phishing mechanism}
+\label{tab:Browsers anti-phishing settings}
+\end{table}
+ 

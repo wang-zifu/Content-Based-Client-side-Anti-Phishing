@@ -1,0 +1,87 @@
+
+\section{Related Work}
+\label{s:related}
+
+%%outline{
+% This section will cover the following concepts:
+
+% In the first paragraph, we mention:
+
+% To the best of our knowledge, Our work is the first systematic measurement for client-side content-based anti-phishing in industrial browsers that provides an empirical study of the performance of client-side anti-phishing and it's effects on blacklisting rate.
+
+% Other studies were previously done in:
+
+% cracking Machine Learning Phishing URL classification (MLPU) system and client-side classifier model
+
+% empirically measuring blacklists considering evasion methods
+
+% In the second paragraph, we talk about the "Phishfarm" paper as the most similar one to our work in the term of evaluation.
+
+% In the third and fourth paragraphs, we summarize the previous papers ( 2016 and 2019) in cracking GSB anti-phishing systems as the most similar works to our work in the term of case study as "Attacks on classifiers."
+
+% In the fifth paragraph, we mention "Phishtime, Golden Hours and PhishTime" papers.
+
+% In the last paragraph, we briefly mention:
+
+% 1)so many works Phishing websites detection 2)Browsers studies 3)Comparison classifiers
+%% outline}
+
+To the best of our knowledge, Our work is the first systematic measurement for client-side content-based anti-phishing in industrial browsers that provides an empirical study of the performance of client-side anti-phishing and its effects on blacklisting rate. 
+
+However, Other studies looking at the in-browser classifier on its own, as well as the effectiveness of the blacklisting backend, but none have evaluated the real-world effectiveness of the in-browser classifiers as they are deployed in modern browsers.
+% However, other studies were previously explicitly done to crack the Machine Learning Phishing URL classification (MLPU) system and the client-side classifier model or empirically measure blacklists with and without considering evasion methods for the main browsers.
+
+% %2016 paper:
+% %Phishfarm 
+The most similar work to ours is~\cite{oest2019phishfarm}. The authors have deployed a framework called ``Phishfarm" for two purposes: 
+
+1) First, measure the timeliness of the industrial browsers' blacklist mechanism (e.g., chrome and Edge). 
+
+2)Second, to test the effectiveness of evasion techniques against the anti-phishing ecosystem.
+
+The authors deployed five batches of 396 fake phishing websites over two weeks using the proposed framework to measure the effectiveness of different sets of existing cloaking techniques on delaying or avoiding blacklisting in the five well known anti-phishing entities.
+We adapted this framework to evaluate the effectiveness of client-side content-based and real-time anti-phishing in the main browsers.
+
+%Machine learning approaches
+%paper 2016
+Liang et al.\cite{liang2016cracking} analyzed the security challenges for the client-side classifier deployed in the Chrome browser. 
+The authors extracted sufficient knowledge from the client-side classifier with reverse engineering techniques. Based on the extracted information, presented a new attack to crack the client-side classifier. They successfully performed two types of evasion attacks to Google's phishing pages filter. These attacks are based on adding or removing features with considerable contributions to classifier scoring into or from the target phishing pages to decrease their phishing scores.
+While this work showed that chrome's client-side classifier is vulnerable to classifiers cracking attacks, it did not consider the user's security in this ecosystem.
+
+%paper 2019
+
+Lei et al.\cite{lei2020advanced} carried out an evaluation on chrome's client-side classifier in 2019 and launched three types of evasion attacks on this classifier.
+Uniquely, this work performed a black-box attack, an attack with no knowledge, on the chrome client-side phishing detection classifier.
+The authors proposed three mutation-based attacks: (1)Black-box, (2)Grey-box, and (3)White-box. These attacks are based on the different amounts of knowledge of the target classifier. 
+They presented a similarity-based method to mitigate the proposed evasion attacks. 
+In addition, the authors emphasized two methods of classification rule selection to improve the robustness of the classifier.
+The key difference in our work is that we not only empirically evaluate the client-side anti-phishing performance; we also assess its effect on blacklisting cover and speed in the real-world.  
+
+
+
+% %Consequently, we found the inconsistency of blacklisting in mobile browsers, and mobile GSB browsers saw zero blacklisting after reporting to the API( anti-phishing entities). %%
+
+
+
+
+%Golden Hours
+Oest et al.\cite{oest2020sunrise} carried out a longitudinal end-to-end life cycle of large-scale phishing attacks to identify the gaps in detection phishing methods and achieve insight into the timing of modern phishing attacks process. The authors also measure the performance of blacklists indirectly. 
+They proposed a Golden Hour framework to measure victim traffic to phishing pages and found that clusters of large attacks are significantly sophisticated.
+The authors evaluated the average effect of blacklisting across the entire dataset and quantified the potential raise in victims caused by delays to emphasize the significance of sufficient blacklisting speed. This finding strengthens the importance of having efficient client-side content-based anti-phishing.
+
+%PhishTime
+
+%Crawl Phish
+
+% %Phishing websites detection. so many works :
+% Browsers studies
+% Attacks on classifiers 
+% Comparison classifiers
+Earlier studies have done in blacklisting analyzing~\cite{virvilis2014mobile,abrams2013browser,sheng2009empirical}.
+Other prior works have assessed the efficiency of browser security warnings against phishing attacks~\cite{akhawe2013alice,egelman2008you,dhamija2006phishing,sunshine2009crying}. Browser-based anti-phishing toolbars are widely proposed and assessed~\cite{tsalis2014browser,huang2009browser,mazher2013web,yue2008anti,marchal2017off}.
+% \usepackage{multirow}
+% \usepackage{colortbl}
+
+
+% \usepackage{multirow}
+% \usepackage{colortbl}
