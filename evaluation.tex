@@ -26,7 +26,7 @@ After our first experiment and the continuous dynamic analysis of chromium, we r
 Table \ref{ModelDifference} shows the difference between the new model and the old model. One of the most important changes in the new model is tuning the threshold.
 Client-side anti-phishing detection does not use a static threshold ( which was 0.5) to identify the phishing sites. In the new model, google safe browsing tunes the threshold and send a dynamic threshold to the client. 
 We confirm that classifier sets the threshold in function~\textit{threshold-probability()} which is a method of the \textit{Scorer} class defined in the file \textit{scorer.cc}. 
-Figure \ref{fig:two model} shows the results of the classifier with the old model and new model results. Although the scorer results are mainly changed, the dynamic threshold (During our experiment in late September, the model threshold was 0.88) became larger than the old static threshold(0.5). Therefore, the number of sites with the phishy score ( scores higher than the threshold) is noticeably low.
+Figure \ref{fig:two model} shows the classifier's results with the old model and new model results. Although the scorer results are mainly changed, the dynamic threshold (During our experiment in late September, the model threshold was 0.88) became larger than the old static threshold(0.5). Therefore, the number of sites with the phishy score ( scores higher than the threshold) is noticeably low.
 As shown in figure \ref{fig:two model} accuracy in the new model is improves by 35\%. 
 
  \begin{figure}
@@ -38,22 +38,22 @@ As shown in figure \ref{fig:two model} accuracy in the new model is improves by 
 
 \subsection{Overall Client-side Content-based Anti-phishing Performance}
 
-as shown in \ref{fig:coverage results}, our experiment demonstrates an important shortcoming about the client-side anti-phishing ecosystem. The phishing websites only became blacklisted if they were reported; content-based classification and real-time anti-phishing do not contribute to blacklisting.
+As shown in \ref{fig:coverage results}, our experiment demonstrates an important shortcoming about the client-side anti-phishing ecosystem. The phishing websites only became blacklisted if reported; content-based classification and real-time anti-phishing do not contribute to blacklisting.
 % \begin{enumerate}
 %     \item The websites in groups without reporting did not get blacklisted
 %     \item all groups of websites with content-based anti-phishing even with suspicious URLs did not get blacklisted
-%     \item The groups of websites with real-time anti-phishing even with suspicious URLs did not get blacklisted
+%     \item The groups of websites with real-time anti-phishing, even with suspicious URLs, did not get blacklisted
 % \end{enumerate}
 According to the network data files and the crawlers log file, the client-side classifier did not detect these websites as phishing websites. There are two main assumptions for this result:
 a)Chrome did not run the classifier on these websites. It might be because avoiding classification when extracting the DOM features takes much time. According to the dynamic analysis of the chromium source code, we found out if extracting DOM elements takes a long time, the classifier runs RunFailure() function and skips the classification.
 b)The classifier result score is less than the threshold. This assumption proves the weaknesses of the machine-learning model accuracy.  The client-side content-based anti-phishing accuracy experiment strengthens this assumption.
 
 \subsubsection{Desktop Blacklists}
-Our study's primary goal is to identify the effect of client-side content-based anti-phishing on blacklisting the newborn phishing websites. After running the main experiment for seven days in mid-may 2020, we analyze the crawler log file and the framework results. Table \ref{fig:coverage results} presents the blacklist coverage for the desktop and mobile google safe browsing blacklists. The key finding in this experiment is the result of the first five groups. For 175 phishing websites, content-based anti-phishing does not affect the blacklisting coverage. For  35 suspicious URLs in group 5, using two client-side anti-phishing methods ( content-based and real-time), there is just one blacklisted phishing URL. The numbers of the blacklisted phishing URL confirm the inefficient performance of google safe browsing client-side anti-phishing methods. The first three groups use the default settings of the chrome browser. 
+Our study's primary goal is to identify the effect of client-side content-based anti-phishing on blacklisting newborn phishing websites. After running the main experiment for seven days in mid-may 2020, we analyze the crawler log file and the framework results. Table \ref{fig:coverage results} presents the blacklist coverage for the desktop and mobile google safe browsing blacklists. The key finding in this experiment is the result of the first five groups. For 175 phishing websites, content-based anti-phishing does not affect the blacklisting coverage. For  35 suspicious URLs in group 5, using two client-side anti-phishing methods ( content-based and real-time), there is just one blacklisted phishing URL. The numbers of the blacklisted phishing URL confirm the inefficient performance of google safe browsing client-side anti-phishing methods. The first three groups use the default settings of the chrome browser. 
 
 \subsubsection{Mobile Blacklists}
 The majority of Internet traffic users are mobile users~\cite{statcounterglobalstats}, and the earlier study has revealed that mobile web browsers are particularly vulnerable to phishing attacks~\cite{luo2017hindsight}.
-We point to one significant finding in our experiment; as shown in table~\ref{fig:coverage results}, none of the phishing sites that used cloaking became blacklist in theww  mobile chrome browsers while they blacklisted in the desktop chrome browsers. However, the inconsistency between desktop and mobile browsers blacklists of mobile chrome browser previously reported in 2018 by~\cite{oest2019phishfarm}, we showed that this shortcoming still exits.
+We point to one significant finding in our experiment; as shown in table~\ref{fig:coverage results}, none of the phishing sites that used cloaking became blacklist in the mobile chrome browsers while they blacklisted in the desktop chrome browsers. However, the inconsistency between desktop and mobile browsers blacklists of mobile chrome browser previously reported in 2018 by~\cite{oest2019phishfarm}, we showed that this shortcoming still exists.
 For mobile chrome browsers with 61.35\%  of all mobile browsers, approximately 2.9 billion users worldwide, this finding is a crucial deficiency in the mobile chrome anti-phishing mechanism.
 Although 90\%  of reported websites did blacklist on Desktop Google Safe Browsing, our experiment results showed that 95\%  of all the websites reported to the entities did not blacklist on Mobile Google Safe Browsing~\ref{fig:coverage results}.
 
@@ -76,7 +76,7 @@ Blacklisting speed for the reported phishing websites is presented in the figure
 
 \subsection{Real-time anti-phishing evaluation}
 
-Google claims the new real-time anti-phishing 30\%  improves the detection of the un-seen phishing websites. Our experiment results for the groups 5 and 6 ( as shown on the table \ref{fig:coverage results} for 70 phishing websites in these two groups, real-time anti-phishing does not affect the blacklisting process as the way it has designed for. For 70 phishing websites, chrome benefits content-based and real-time anti-phishing methods cause blacklisting just one phishing website.
+Google claims the new real-time anti-phishing 30\%  improves the detection of the un-seen phishing websites. Our experiment results for groups 5 and 6 ( as shown on the table \ref{fig:coverage results} for 70 phishing websites in these two groups, real-time anti-phishing does not affect the blacklisting process as the way it has designed for. For 70 phishing websites, chrome benefits content-based and real-time anti-phishing methods cause blacklisting just one phishing website.
 
 \begin{figure*}[t]
   \includegraphics[width=\textwidth,height=9cm]{figures/DesktopBlacklistSpeed.png}

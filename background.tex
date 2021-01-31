@@ -1,108 +1,56 @@
 
 \section{Background}
 \label{s:background}
-% % outline{
-%The layout of this section is going to be as follows:
-% The first paragraph:
-% Briefly about 1)phishing attacks(done) 2)anti-phishing methods(done)
-%  3)Our focus on studying Browsers' Content-based Anti-phishing mechanism (not done)} outline
-Phishing is a kind of social engineering attack in which attackers (phishers) try to convince a target to disclose sensitive information to a fraudulent website purporting to be a well-known brand~\cite{dodge2007phishing,holz2009learning,mcgrath2008behind}. Phishers also exploit any circumstance to deploy their campaigns,for instance attackers started to exploit new different situation that Corona virus brought to the world\cite{bitaab2020scampandamic}.
+
+Phishing is a kind of social engineering attack in which attackers (phishers) try to convince a target to disclose sensitive information to a fraudulent website purporting to be a well-known brand~\cite{dodge2007phishing,holz2009learning,mcgrath2008behind}. Phishers also exploit any circumstance to deploy their campaigns; for instance, attackers started to exploit new different situations that the Coronavirus brought to the world\cite{bitaab2020scampandamic}.
 Attackers use the harvested information for their own profits~\cite{sood2013crimeware,aleroud2017phishing}.
 These attacks compromise user accounts and identities, and on a larger scale, they also damage the targeted brand reputation and burden massive cost to the targeted companies to deploy an extensive anti-phishing system to protect the brand and consumers~\cite{hong2012state}.
 
 Several anti-phishing solutions have been done in detecting phishing attacks. Blacklists and ML-based methods are two major types of anti-phishing approaches. However, blacklists have a significant shortcoming in detecting 0-day attacks~\cite{oest2019phishfarm}. 
-On the other hand, ML-based techniques, beyond being scalable and accurate, they are able to detect newly created phishing websites~\cite{whittaker2010large}.
-The ML-based approaches are deployed in industrial browsers such as chrome and Edge to cover the blacklists shortcomings~\cite{safebrowsing,mjcaparas}.
+On the other hand, ML-based techniques, beyond being scalable and accurate, are able to detect newly created phishing websites~\cite{whittaker2010large}.
+The ML-based approaches are deployed in industrial browsers such as Chrome and Edge to cover the blacklists shortcomings~\cite{safebrowsing,mjcaparas}.
 
-%%%'need to add" Chromium vs chrome:
-%Chromium is the open-source project behind the google chrome browser. Although chrome has different functionalities that chromium does not, google safe browsing is the same in both. Therefore, we study the GSB source in chromium, and we deployed the chrome browser in the real-world experiment. Our study released the main shortcoming of safe browsing during chromium source code analysis. These findings affect other Chromium-based browsers like  Edge version 84.
+%%%'need to add" Chromium vs Chrome:
+%Chromium is the open-source project behind the google chrome browser. Although Chrome has different functionalities that chromium does not, google safe browsing is the same in both. Therefore, we study the GSB source in chromium, and we deployed the chrome browser in the real-world experiment. Our study released the main shortcoming of safe browsing during chromium source code analysis. These findings affect other Chromium-based browsers like  Edge version 84.
 \subsection{Website and Webpage Structure}
 A website is formed of webpages for presenting the content to the user. A webpage has multiple elements and a basic structure. These elements are presented in the DOM tree; a hierarchical tree shows the webpage's DOM nodes, including element, text, attribute, and comment codes.
 The combination of elements, texts, attributes, and scripts determines a web page's appearance and functionalities.
 
-
 \subsection{Phishing attacks}
-
-%%% Outline{ In this subsection, we will discuss phishing attacks in more detail:
-
-% Phishing attacks mechanism
-
-% Sophisticating phishing attacks} outline
-
 Phishing attacks consists of three major stages: In the first phase, attackers create a fake website masquerading it as a trusted website to make it difficult for a user to distinguish that it is a fake site. Phishers can deploy these fake sites without expertise technical knowledge by using the phishing kits. Second, they send messages to various users to convince them to click on the phishing website's link. Phishers use social engineering to deceive users to take the action~\cite{dhamija2006phishing,thomas2013trafficking}. If the victim clicks on the link, he visits the phishing websites and inserts sensitive information. In the last stage, the phishers extract the victim's information from the phishing website and monetizing that information~\cite{gupta2018defending}.
 
- %Starting pandemic they did not hesitate to take advantage of users' increased usage of the Internet and their reliance on it   \cite{bitaab2020scampandamic}   
-
-% \subsection{Browser-based Anti-Phishing}
-% %\subsection{Browser-based phishing detection}
-% %%% outline { In this subsection, we will provide details about the major browsers' anti-phishing mechanism.
-
-% % Google Safe Browsing, Microsoft Smart Screen, Safari, Opera
-
-% % We show browser-side anti-phishing settings for all the browsers in a table. }outline
-%  Due to browsers' strategic position and scale, they play a significant role in defending users' security against phishing attacks~\cite{ma2009beyond}. Many modern web browsers -like Chrome and Microsoft Edge- provide built-in detection tools to protect users against phishing attacks on desktop and mobile platforms. For most industrial browsers these native anti-phishing tools include two type of protecting layer: (1) Blacklist (2) Client-side heuristic.
-%  Table \ref{tab:Browsers anti-phishing settings} shows the anti-phishing methods deployed in the major web browsers.
-% %  Table \ref{tab:Browsers anti-phishing settings} shows the anti-phishing mechanism used in the different modern web browsers.
-%  The browser-side classifier use the ML-based trained approach to analyze the websites that user visits~\cite{liang2016cracking}. As a result, if the classifier suspects that a website is malicious the browser shows ``perminanty" warning page to the user .
-%  However, Google Safe Browsing introduced another anti-phishing mechanism called ``Real-Time". When user visits a website, chrome checks the URL against the local lists of thousands of trusted websites. If the URL does not match on the local  white-list, chrome checks the URL with google to evaluate the website's phishy-ness~\cite{googlechromeprivacywhitepaper}. Table \ref{tab: Chrome Security levels} shows chrome browser's anti-phishing layers.
-%  Chrome provides Three different levels of security: (1) No protection, (2) Standard Protection, and (3) Advanced Protection.
-
-% %  Chrome provides Three different levels of security: 
-% %  1-No protection
-% %  2-Standard Protection
-% %  3-Advanced Protection
-% In this work, we investigate the protection level of these three layers along with their security policies.
-% %  In this work, we figure out how these layers protect users and what security policies they provide.
-
 \subsection{Blacklists}
-
-As an access control-based mechanism, blacklists are the first defense layer of the browsers against phishing attacks which is by default enabled in the all the major web browsers (i.e., Chrome, Firefox, Opera, Edge, and Safari), both in desktop and mobile platforms.
-When users, even without knowledge about malicious websites, visit a fake site without having third-party security defense software, anti-phishing blacklists protect users by displaying prominent warnings in place of the malicious content.Blacklists were the first large-scale anti-phishing defense deployed in browsers. 
+As an access control-based mechanism, blacklists are the first defense layer of the browsers against phishing attacks, which is by default enabled in all the major web browsers (i.e., Chrome, Firefox, Opera, Edge, and Safari), both in desktop and mobile platforms.
+When users, even without knowledge about malicious websites, visit a fake site without having third-party security defense software, anti-phishing blacklists protect users by displaying prominent warnings in place of the malicious content. Blacklists were the first large-scale anti-phishing defense deployed in browsers. 
 Researchers have proved that blacklists have a significant effect on shutting the phishing campaign down~\cite{sheng2009empirical}.
 However, they have noticeable shortcomings, as revealed in the previous studies~\cite{oest2020sunrise}.
 
-Although Google incorporated real-time lookups for phishing URLs and improved the speed of GSB suffer from "up to 30 minutes", this feature is not enabled by default, and it still suffers from the delay of caching and periodically updating the local copy of the URL blacklist database providing the attackers an opportunity to launch their phishing campaign. This change also applies to the mobile version of Chrome. We also evaluated this new feature in our experiments~\cite{google-online-security-blog-2019}. Due to short lifetime of the phishing sites, a few hour of latency can affect the blacklist performance in a significant way, and relying on blacklisting can grow the risk disclosure of all internet users subject to a malicious attack~\cite{oest2020sunrise,sheng2009empirical}.
-
-
-% Unfortunately, blacklists suffer from reactive approaches' weaknesses as latency and 30 minutes updating windows delay, providing the attackers an opportunity to launch their phishing campaign. 
-
-% The average lifetime of the phishing sites is about three days ~\cite{oest2020sunrise}, and most of them last less than a day; therefore, a few hours of latency can affect the blacklist performance in a significant way. On the other hand, in the term of updating window, relying on blacklisting can grow the risk disclosure of all internet users subject to a malicious attack~\cite{sheng2009empirical}.
+Although Google incorporated real-time lookups for phishing URLs and improved the speed of GSB suffer from "up to 30 minutes", this feature is not enabled by default, and it still suffers from the delay of caching and periodically updating the local copy of the URL blacklist database providing the attackers an opportunity to launch their phishing campaign. This change also applies to the mobile version of Chrome. We also evaluated this new feature in our experiments~\cite{google-online-security-blog-2019}. Due to the short lifetime of the phishing sites, a few hours of latency can affect the blacklist performance in a significant way, and relying on blacklisting can grow the risk disclosure of all internet users subject to a malicious attack~\cite{oest2020sunrise,sheng2009empirical}.
 
 However, the effectiveness of this mechanism relies on the coverage, speed, and accuracy~\cite{sheng2009empirical}. Modern web browsers' blacklists utilize different blacklist entities with related characteristics~\cite{bell2020analysis}. For example, one specific phishing site could be blacklisted for the chrome browser's users but not for Edge browser's users.
 Even for the browsers that are protected with one blacklist provider entity, although the coverage of the blacklists is the same, the speed of the blacklisting might be different, relying on different implementations in the browsers~\cite{oest2019phishfarm}.
-Figure 2 shows the anti-phishing mechanism in the modern web browsers. 
-% Unfortunately, blacklists suffer from latency and 30 minutes updating windows delay, providing the attackers an opportunity to launch their phishing campaign. The average lifetime of the phishing sites is about three days ~\cite{oest2020sunrise}, and most of them last less than a day; therefore, a few hours of latency can affect the blacklist performance in a significant way. On the other hand, in the term of updating window, relying on blacklisting can grow the risk disclosure of all internet users subject to a malicious attack~\cite{sheng2009empirical}.
+Figure 2 shows the anti-phishing mechanism in modern web browsers. 
 
-% might be something related to our work: like in this work blah blah related to blacklist: maybe:
-We evaluate content-based anti-phishing performance and its effects on blacklisting coverage and speed in chrome browser.
+We evaluate content-based anti-phishing performance and its effects on blacklisting coverage and speed in the chrome browser.
 
 \subsection{Evasion methods}
-%%% outline { We elaborate evasion methods here as: 
-% How do the evasion method works?
-% What are the main evasion methods?
-Evasion methods differ in various contexts. In this study we refer to two types of evasion methods:
+Evasion methods differ in various contexts. In this study, we refer to two types of evasion methods:
 1) ML-based classifier evasion methods: the purpose of these attacks is to evade classifiers by crafting adversarial samples using various mechanisms even in the black-box scenario without any knowledge about the Model~\cite{anderson2019adversarial}. 
-2) Blacklisting Evasion methods : these evasion techniques refer to the various methods used by attackers to avoid being analyzed by security infrastructures~\cite{egele2008survey}.
+2) Blacklisting Evasion methods: these evasion techniques refer to the various methods used by attackers to avoid being analyzed by security infrastructures~\cite{egele2008survey}.
 Phishing sites utilize evasion techniques to avoid revealing malicious content to search engine crawlers while keeping it visible to the potential victims ~\cite{samarasinghe2020cloaking, invernizzi2016cloak,panum2020towards}. 
 Attackers increase their return-on-investment(ROI) by deploying evasion methods to delay or prevent blacklisting~\cite{han2016phisheye,nero2011phishing,oest2019phishfarm}. 
 
 Blacklist and heuristic anti-phishing methods are vulnerable to evasion techniques because they depend on content verification and can prevent or make delay in blacklisting~\cite{oest2019phishfarm}.
-Previous works have studied evasion techniques like cloaking, redirection, using URL shorteners and code obfuscation~\cite{fette2007learning,cova2008there,chhabra2011phi}.
+Previous works have studied evasion techniques like cloaking, redirection, using URL shorteners, and code obfuscation~\cite{fette2007learning,cova2008there,chhabra2011phi}.
 
 Cloaking is a well-known evasion technique that attempts to show different content to users than to blacklist infrastructure. When a crawler wants to visit the phishing websites with cloaking, it shows a benign page or an error message~\cite{invernizzi2016cloak}.
-% The last paragraph mentions that we evaluate content-based anti-phishing against the cloaking evasion method. %%%}outline 
-To the best of our knowledge, it is the first work in evaluating impact of of cloaking on the client-side content-based anti-phishing ecosystem.
+To the best of our knowledge, it is the first work in evaluating the impact of cloaking on the client-side content-based anti-phishing ecosystem.
 
 \subsection{Ml-based Anti-phishing}
+Machine Learning (ML)-based anti-phishing solutions extract features of the websites and feed these features into a trained model with related rules and weight to phishing detection. However, studies have shown that ML-based classifiers are open to attack to the evasion tricks~\cite{lei2020advanced,laskov2014practical,chen2018automated,xuposter,hu2017black,anderson2019adversarial,aleroud2020bypassing,sabir2020evasion}. 
 
-%%% outline { We mainly focus on the chrome anti-phishing system, and it is an ML-based anti-phishing approach. So we discuss more the ML-based anti-phishing methods here.} outline
-Machine Learning (ML)-based anti-phishing solutions extract features of the websites and feed this features into a trained model with related rules and weight to phishing detection. However, studies have shown that ML-based classifiers are open to attack to the evasion tricks~\cite{lei2020advanced,laskov2014practical,chen2018automated,xuposter,hu2017black,anderson2019adversarial,aleroud2020bypassing,sabir2020evasion}. 
-%difference between ml-based evasion methods and crawler evasion methods
+Evasion attacks are effective on practical ML-based classifiers, and at the same time, these attacks can be successfully launched without changing the functionalities and appearance~\cite{lei2020advanced}.
 
-Evasion attacks are effective on practical ML-based classifiers, and at the same time these attacks can be successfully launched without changing the functionalities and appearance~\cite{lei2020advanced}.
+As shown in the table~\ref{tab:Browsers anti-phishing settings}, most major browsers(e.g., Chrome, Firefox, and Edge) implement ML-based anti-phishing in the browser-side to analyze the sites that users seek to visit to detect malicious websites and protect them against them~\cite{mjcaparas,whittaker2010large}.
 
-As shown in the table~\ref{tab:Browsers anti-phishing settings} most major browsers(e.g. Chrome, Firefox and Edge) implement ML-based anti-phishing in the browser-side to analyze the sites that users seek to visit to detect malicious websites and protect them against them~\cite{mjcaparas,whittaker2010large}.
-
-
-% % \subsection{Server-Side vs. Client-Side Detection}
 

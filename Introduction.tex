@@ -1,145 +1,42 @@
-
-
 \section{Introduction}
 \label{s:intro}
 
-Phishing attacks remain popular among criminals with the growth of sophisticated phishing websites as well as the aid of evasion techniques such as cloaking~\cite{oest2020phishtime,hao2013understanding,internet-crime-complaint-center-(ic3)-business-e-mail-compromise-the-12-billion-dollar-scam}. With the support of illicit underground services, these fraudulent sites cause collateral damage by harming the reputation of impersonated brands, compromising legitimate infrastructure, and demands effort to assuage abuse~\cite{zhang2007cantina}.
+Phishing attacks remain popular among criminals with the growth of sophisticated phishing websites and the aid of evasion techniques such as cloaking~\cite{oest2020phishtime,hao2013understanding,internet-crime-complaint-center-(ic3)-business-e-mail-compromise-the-12-billion-dollar-scam}. 
+With the support of illicit underground services, these fraudulent sites cause collateral damage by harming the reputation of impersonated brands, compromising legitimate infrastructure, and demands effort to assuage abuse~\cite{zhang2007cantina}.
 
-There are two categories of approaches in protecting users against phishing attacks:reactive and proactive methods. Blacklists, as a reactive approach, require blacklists entities to validate the fraudulency of the visited website. Content-based methods as a proactive approach analyze the content of the website~\cite{wang2011verilogo}.
+There are two categories of approaches in protecting users against phishing attacks: reactive and proactive methods. Blacklists, as a reactive approach, require blacklists entities to validate the fraudulency of the visited website. Content-based methods as a proactive approach analyze the content of the website~\cite{wang2011verilogo}.
 
-Blacklists have shown high accuracy (low false-positive rates) in identifying phishing websites. However, there is a noticeable window of risk between the time that the phishing site first goes up and the time it is available in the browsers' blacklists. Moreover, Blacklists also not efficient in detecting \textit{targeted phishing attacks} such as \textit{spear phishing} attacks which target a specific group of people~\cite{burns2019spear}.
-%or the important individuals at an organization ~\cite{burns2019spear}. 
-%These attacks utilize social engineering to customize the attacks. They occur on a small geographical and timing scale.
-Thus, the content-based anti-phishing defense method comes to the rescue to not only validate the visited website proactively to identify likely phishing pages but to also detect the small phishing campaign.
+Blacklists have shown high accuracy (low false-positive rates) in identifying phishing websites. However, there is a noticeable window of risk between the time the phishing site first goes up and the time it is available in the browsers' blacklists. Moreover, Blacklists also not efficient in detecting \textit{targeted phishing attacks} such as \textit{spear phishing} attacks which target a specific group of people~\cite{burns2019spear}.
+Thus, the content-based anti-phishing defense method comes to the rescue to not only validate the visited website proactively to identify likely phishing pages but also to detect the small phishing campaign.
 
-Nowadays, the modern desktop and mobile web browsers utilize a content-based anti-phishing system beside the default anti-phishing blacklists to protect the user against known and unknown malicious sites. The primary purpose of appending this mechanism to the browsers is to cover the shortcomings of blacklists in detecting new malicious sites~\cite{googlechromeprivacywhitepaper}. Still, there is a need to evaluate these client-side classifiers to assess their performance, especially when facing phishing attacks with evasion techniques. Moreover, this thorough evaluation will assist in increasing the security of the users in the browsers with the client-side anti-phishing system.
+Nowadays, the modern desktop and mobile web browsers utilize a content-based anti-phishing system besides the default anti-phishing blacklists to protect the user against known and unknown malicious sites. The primary purpose of appending this mechanism to the browsers is to cover the shortcomings of blacklists in detecting new malicious sites~\cite{googlechromeprivacywhitepaper}. Still, there is a need to evaluate these client-side classifiers to assess their performance, especially when facing phishing attacks with evasion techniques. Moreover, this thorough evaluation will assist in increasing the security of the users in the browsers with the client-side anti-phishing system.
 
 In this paper, we study the effectiveness of the client-side anti-phishing system, including the content-based, Real-time, and password protection mechanism deployed in Chrome, as the most popular browser in the world. We focus on addressing the client-side anti-phishing shortcomings of Google Safe Browsing~(GSB) since it has the largest share of users worldwide, with around three billion active users~\cite{statcounterall}.
 For this purpose, we propose an empirical analysis contributing to the Phishfarm framework~\cite{oest2019phishfarm}
-%to evaluate content-based anti-phishing functionality and its effectiveness in blacklisting new brand and unseen phishing websites. 
+ 
 First, we extract the Chrome browsers' built-in classifier, Google's phishing pages filter (GPPF), via the static and dynamic analysis on chromium implementation. 
 The extracted classifier information includes the classification algorithm, the number of scoring rules, the corresponding rules weight, scores formula, and the classifier's features. 
 Based on classifier information, we evaluate the client-side and server-side classifier. Our experiments reveal that only 12\%  of the phishing websites have scored more than the threshold, and the GSB server only detects 15\%  of the phishing websites among the websites that the client-side classifies as phishing websites. 
 
-The central part of our experiment, done on a large scale, is measuring the content-based anti-phishing effects on the blacklist's speed and coverage.
+Our experiment's central part, done on a large scale, is measuring the content-based anti-phishing effects on the blacklist's speed and coverage.
 Nowadays, many phishing kits employ server-side cloaking, and they make the presence of cloaking a  norm within modern phishing websites~\cite{oest2018inside}.
 To perform a real-world study, we considered server-side cloaking with an IP address filter as a common evasion technique in desktop and mobile browsers.
-We consider four different anti-phishing components that the chrome browser uses: (1) blacklist, (2) Content-based , (3) real-time, and (4) password protection. This browser utilize these anti-phishing mechanisms in three different security layers: (1) no protection, (2) standard Protection, and (3) enhanced protection
-%We consider three defense layers of the chrome browser: (1) Blacklist, (2) Content-based anti-phishing, and (3) Real-time anti-phishing.
-We perform this experiment for seven days and monitor the blacklisting process to see the effects of Chrome's different defense layers in dealing with cloaking and reporting to the main entities.
+We consider four different anti-phishing components that the chrome browser uses: (1) blacklist, (2) Content-based, (3) real-time, and (4) password protection. This browser utilizes these anti-phishing mechanisms in three different security layers: (1) no protection, (2) standard protection, and (3) enhanced protection.
+
+We perform this experiment for seven days and monitor the blacklisting process to see the effects of Chrome's different defense layers in cloaking and reporting to the main entities.
 The experiment results lead to several interesting findings: 
 despite GSB claims, the client-side content-based anti-phishing does not affect the blacklisting speed and accuracy.
-%The It has significant bugs and shortcomings in scoring the phishing websites. The uncovered classifier's scoring and algorithm bugs lead to an inefficient content-based anti-phishing system in the real-world. 
+
 Moreover, the chrome browser's real-time anti-phishing system has serious shortcomings, and the server classifier results in the real-time anti-phishing requests are inefficient. 
-In terms of privacy, in the client-side anti-phishing ecosystem, after detecting a malicious site, client sends a request to the server to run the server-side classifier and analyze the site. The browser sends some privacy-related information in this request.
+In terms of privacy, in the client-side anti-phishing ecosystem, clients sending a request to the server to run the server-side classifier and analyze the site after detecting a malicious site. The browser sends some privacy-related information in this request.
 The password protection approach is also vulnerable to manipulating DOM elements names. 
 There is also a considerable inconsistency in the desktop and mobile blacklists. Even in the absence of cloaking, and after reporting the phishing sites to the blacklists entities, mobile chrome blacklists providers do not blacklist reported phishing sites.
 
 The contributions of our paper are as follows:
 
 \begin{itemize}
-    %\item A longitudinal empirical measurement of user security in the client-side content-based anti-phishing ecosystem. 
-    \item The first in-depth and continuous long-term measurements of chrome browser's anti-phishing, including content-based, real-time and password protection methods, and disclosure of the weaknesses and inefficiency of these three components.
-    %\item The first empirical study of chrome real-time anti-phishing methods and its effect on the blacklisting of un-seen phishing websites.
+    \item The first in-depth and continuous long-term measurements of chrome browsers' anti-phishing, including content-based, real-time, and password protection methods, and disclosure of these three components' weaknesses and inefficiency.
     \item Identification and disclosure of remaining significant inconsistency in the desktop and mobile blacklists.
-    \item The first empirical study to evaluate the GSB server-side classifier performance dealing with phishing websites in the wild.
+    \item The first empirical study evaluates the GSB server-side classifier performance dealing with phishing websites in the wild.
     \item Disclosure of serious privacy issues in the chrome browser's client-side content-based anti-phishing system
 \end{itemize}
-
-% \section{Introduction}
-
-% Although a large-scale ecosystem is employed to protect users, phishing remains popular among criminals with the help of the growth in sophistication of phishing websites, and subsequently cause collateral damage by harming the
-% the reputation of impersonated brands, compromising legitimate
-% infrastructure, and demand effort to assuage abuse~\cite{zhang2007cantina}.
-
-
-
-%  %**the growing sophistication of attacks:
-%  Phishing websites continue to be more sophisticated with the aid of evasion techniques like cloaking~\cite{oest2020phishtime}.
-%  %Phishing kits have claoking 
-%  Due to the support of illicit underground services, phishing is still scalable and has a low entry barrier even for sophisticated and evasive attacks~\cite{internet,hao2013understanding}.
- 
-% %  , the client-side evasion techniques
-% Blacklists are a reactive approach. They require that blacklist providers visit the suspicious site, validate that it is indeed a phishing site, and send this information to the client. 
-% Although this approach has low false-positive rates, it leads to a noticeable window of risk between the time that phishing site first goes up and the time it is made available in the browser blacklist~\cite{wang2011verilogo}. 
-
-% On the other hand, content-based anti-phishing approaches are proactive approaches against phishing attacks. This defense method proactively analyzes the content of the site that users intend to visit, evaluates the site's validation,identify likely phishing pages, and protects users against not-blacklisted phishing sites.
-
-% Nowadays, the main desktop and mobile web browsers utilize a content-based anti-phishing system beside the default anti-phishing blacklists to protect the user against known and unknown malicious sites. The primary purpose of appending this mechanism to the browsers is to cover the shortcomings of blacklists in detecting new malicious~\cite{googlechromeprivacywhitepaper}. 
-
-% % Table \ref{tab:Browsers anti-phishing settings} shows the anti-phishing methods deployed in the major web browsers.
-
-% % We focus on Chrome browser in this paper.
-% %inja begam chera asan client-side umad
-% %second paragraphs: previous works
-% % Despite the importance of browser built-in anti-phishing for the users' security, there have been no longitudinal, systematic, real-word studies of the browsers' client-side content-based anti-phishing ecosystem.
-
-% % Despite the importance of the browser built-in anti-phishing for the users' security, no longitudinal, systematic and real-world study has been conducted specifically on the client-side content-based anti-phishing ecosystem of the browsers.
-% % Few works have been done in evading the client-side classifier providing effective evasion attacks on ML-based web phishing classifiers~ \cite{lei2020advanced,liang2016cracking}.
-% Although prior work has evaluated client-side classifiers~\cite{lei2020advanced,liang2016cracking}, these studies did not assess the client-side's real-world impact classifier performance considering common phishing attacks with evasion techniques. Also, no work has been done on the security of the users in the browsers' content-based anti-phishing system.
-% % However, no work has been done on users' security in the browsers' content-based anti-phishing system.
-% % However, no work has been done on the security of the users in the browsers' content-based anti-phishing system.
-% % On the other hand, although the empirical evaluation is crucial to identify the anti-phishing ecosystem's vulnerabilities, there is no research has been done in empirical measurements of the content-based classification is effective in blacklisting 0-day phishing websites.
-% % On the other hand, although the empirical evaluation is crucial in identifying the vulnerabilities of the anti-phishing ecosystem, no research has been done to show the effectiveness of the content-based classification in blacklisting new phishing websites. Protecting users against phishing attacks 
-% The growth of new and more sophisticated phishing websites increases the importance of proactive defenses. There are many studies in evaluating the blacklists, but few works have been done in the client-side content-based system as a second defense layer of commercial browsers. 
-
-
-
-% %%% **the effectiveness of empirical measurements to identify ecosystem gaps:
-% %%%How the client-side browsers work in the real word
-   
-% %%%**limited studies of client-side browser defenses 
-
-
-%  %%%**increasing importance of such defenses given their ability to be proactive
-
-% %forth paragraph: in this paper what we have done
-% In this paper, we thoroughly evaluate the client-side content-based anti-phishing in chrome, the most popular browser in the world, performing an empirical analysis on this browser.
-% We focus on GSB since it has the largest share of users worldwide, with around three billion users. We tried to evaluate chrome anti-phishing power against the phishing attacks to address the GSB client-side anti-phishing shortcomings.
-
-% For this purpose, we propose an empirical analysis contributing to the Phishfarm framework~\cite{oest2019phishfarm} to evaluate content-based anti-phishing functionality and its effectiveness in blacklisting new brand and unseen phishing websites.  First, we extract the Chrome browsers' built-in classifier, Google's phishing pages filter (GPPF) via the static and dynamic analysis on the implementation of chromium. 
-% The extracted classifier information includes the classification algorithm, the number of scoring rules, the corresponding rules weight, scores formula, and the classifier's features. 
-% Based on classifier information, we evaluate the client-side and server-side classifier. Our experiments reveal that only 12\%  of the phishing websites have scored more than the threshold, and the google safe browsing server only detects 15\%  of the phishing websites.
-
-% % Based on classifier information, we design a framework to perform two preliminary experiments: 
-% % 1)Client-side classifier: the results of this experiment show that around 12 percent of the phishing websites have scored more than the threshold.
-% % 2)Server-side classifier: this experiment demonstrates that the server's responds show that google safe browsing server only detects 15 percent of the phishing websites.
-% % (1) We feed the classifier with 200 phishing sites from the Phishtank database and observe the classifier's results.
-% % The results show that around 12 percent of the phishing websites have scored more than the threshold.
-% % (2) We modify the client-side classifier threshold to send request to the server for 100 phishing websites to analyze the efficiency of the server-side classifier.
-% % The server's responds show that google safe browsing server only detects 15 percent of the phishing websites.
-% The main part of our experiment that has been done on a large scale is the measuring of the content-based anti-phishing effects on the blacklist's speed and coverage.
-% Nowadays, many phishing kits employ server-side cloaking, and they make the presence of cloaking a  norm within modern phishing websites~\cite{oest2018inside}.
-% To perform a real-world study, we considered server-side cloaking with IP address filter as a common evasion technique in the desktop and mobile browsers.
-% % In this experiment, we considered cloaking as a main evasion technique in the desktop and mobile browsers. 
-% % We consider 14 batches to cover the different combinations of browser settings and implementation of cloaking, and reporting to the blacklist entities in different ways. We assign 35 sites for each group. In May 2020, we created a total of 490 new phishing websites to evaluate content-based anti-phishing in terms of different browser defense layers and cloaking.
-% We consider three defense layers of the chrome browser: (1) Blacklist, (2) Content-based anti-phishing, and (3) Real-time anti-phishing.
-% We perform this experiment for seven days and monitor the blacklisting process to see the effects of different defense layers of chrome in dealing with cloaking and reporting to the main entities.
-% The experiment results lead to several interesting findings: 
-% Despite GSB claims, the client-side content-based anti-phishing does not affect the blacklisting speed and accuracy.
-% %The It has significant bugs and shortcomings in scoring the phishing websites.The uncovered classifier's scoring and algorithm bugs lead to an inefficient content-based anti-phishing system in the real-world. 
-% Moreover, the chrome browser's real-time anti-phishing system has serious shortcomings, and the server classifier results in the real-time anti-phishing requests are inefficient. 
-% In terms of privacy, in the client-side anti-phishing ecosystem, after detecting a malicious site client sends a request to the server to run the server-side classifier and analyze the site. The browser sends some privacy-related information in this request.
-% The password protection approach is also vulnerable to manipulating DOM elements names. 
-% There is also a considerable inconsistency in the desktop and mobile blacklists. Even in the absence of cloaking, and after reporting the phishing sites to the blacklists entities, mobile chrome blacklists providers do not blacklist reported phishing sites.
-% % \begin{enumerate}
-% %     \item Despite GSB claims, The client-side content-based anti-phishing does not affect the blacklisting speed and  accuracy.
-% %     \item The client-side content-based classifier has significant bugs and shortcomings.
-% %     \item The real-time anti-phishing system has serious shortcomings, and the server classifier results in the real-time anti-phishing requests are inefficient.
-% %     \item In the client-side anti-phishing ecosystem, after detecting a malicious site client sends a request to the server to run the server-side classifier and analyze the site. The browser sends some privacy-related information in this request.
-% %     \item There is considerable inconsistency in the desktop and mobile blacklists. Even in the absence of cloaking, and after reporting the phishing sites to the blacklists entities, mobile chrome blacklists providers do not blacklist reported phishing sites.
-% % \end{enumerate}
-
-% The contributions of our paper are as follows:
-
-% \begin{itemize}
-%     %\item A longitudinal empirical measurement of user security in the client-side content-based anti-phishing ecosystem. 
-%     \item The first in-depth and continuous long-term measurements of chrome browser's anti-phishing including content-based, Real-time and password protection methods, and disclosure of the weaknesses and inefficiency of these three components.
-%     %\item The first empirical study of chrome real-time anti-phishing methods and its effect on the blacklisting of un-seen phishing websites.
-%     \item Identification and disclosure of remaining significant inconsistency in the desktop and mobile blacklists.
-%     \item The first empirical study to evaluate the GSB server-side classifier performance dealing with phishing websites in the wild.
-%     \item Disclosure of serious privacy issues in the chrome browser's client-side content-based anti-phishing system
-% \end{itemize}
-
-% %Moved to the earlier paragraphs in Intro
-% % In this paper, we focus on GSB since it has the largest share of users worldwide  with around three billion users. We tried to evaluate chrome anti-phishing power againt the phishing attacks to address the GSB client-side anti-phishing shortcomings .  

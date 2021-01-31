@@ -5,22 +5,22 @@ This section discusses the limitations of our work and suggestions for improving
 
 Even though blacklists have the ability to detect the typical evasion techniques which are tested in our work as well as in the previous work~\cite{oest2020phishtime}, our experiments have revealed that these techniques slow the speed of the blacklisting. A significant gap also remains in blacklists' coverage on mobile devices. The client-side anti-phishing proactive approaches are defined to overcome these shortcomings.
 
-Basically, our study's primary purpose was to evaluate client-side anti-phishing, and our experiment revealed surprising results in this regard. Although the client-side anti-phishing primary role is proactively mitigating the new phishing attacks to overcome the blacklists' delay in protecting users, for not reported websites, the client-side content-based anti-phishing does not affect blacklists coverage or speed. However, our findings show that for reported phishing websites without cloaking techniques, content-based anti-phishing accelerates blacklisting. This ecosystem suffers from serious challenges: "If client-side anti-phishing- including the content-based and real-time mechanism- does not affect the blacklisting performance, what reasons are behind deploying these methods?"
+Our study's primary purpose was to evaluate client-side anti-phishing, and our experiment revealed surprising results in this regard. Although the client-side anti-phishing primary role is proactively mitigating the new phishing attacks to overcome the blacklists' delay in protecting users, for not reported websites, the client-side content-based anti-phishing does not affect blacklists coverage or speed. However, our findings show that for reported phishing websites without cloaking techniques, content-based anti-phishing accelerates blacklisting. This ecosystem suffers from serious challenges: "If client-side anti-phishing- including the content-based and real-time mechanism- does not affect the blacklisting performance, what reasons are behind deploying these methods?"
 
-The other issue is concerning the server-side classifier. The client-side classifier sends its results to the server to make the final evaluation on the related suspicious websites; on the other hand, the real-time anti-phishing method also sends every visited URL to the server, still, this method does not affect the blacklisting. These findings raise question on the server-side classification performance or even occurrence.
+The other issue is concerning the server-side classifier. The client-side classifier sends its results to the server to make the final evaluation on the related suspicious websites; on the other hand, the real-time anti-phishing method also sends every visited URL to the server; still, this method does not affect the blacklisting. These findings raise a question on the server-side classification performance or even occurrence.
 
 Our findings could be used to improve the client-side classification accuracy. Continuous monitoring of the most recent phishing websites' structure- including URLs and the content- training the related machine-learning model, and refining the classification algorithm with this data, can further improve the client-side content-based detection.
 
 Although the server-side classifier is not accessible, we analyze it by sending a phishing verdict for real phishing websites. During this study, we found out that the server-side classifier's results are directly proportional to the value of the client-side scorer results. Thus, our study methodology could also be used to improve the server-side classifier.
 
 Our empirical blacklists experiment that we performed on the Chrome browser and GSB could be used to analyze other modern browsers and related entities. 
-Although our work focuses on browser anti-phishing mechanism, the scope of future experiments could also be shifted to evaluate other threats( e.g, spam filters and  malware). 
+Although our work focuses on browser anti-phishing mechanism, the scope of future experiments could also be shifted to evaluate other threats(e.g., spam filters and malware). 
 
 \subsection{Security Recommendations}
 
 Based on our study results, we recommend several potential improvements to Google Chrome's client-side anti-phishing ecosystem.
 
-\textbf{Chrome client-side anti-phishing}. We believe that the highest priority within the current ecosystem should be an effective native client-side anti-phishing in both desktop and mobile browsers. The ineffectiveness of current client-side anti-phishing on blacklisting performance is sufficient for the necessity of enhancing the functionality of the client-side anti-phishing mechanisms, including content-based anti-phishing, password protection, and real-time anti-phishing. periodic performing this study could be used for evaluating this ecosystem.
+\textbf{Chrome client-side anti-phishing}. We believe that the highest priority within the current ecosystem should be an effective native client-side anti-phishing in both desktop and mobile browsers. The ineffectiveness of current client-side anti-phishing on blacklisting performance is sufficient for the necessity of enhancing the functionality of the client-side anti-phishing mechanisms, including content-based anti-phishing, password protection, and real-time anti-phishing. Periodic performing this study could be used for evaluating this ecosystem.
 
 \textbf{Blacklist occurrence and timeliness}. The phishing attacks' life-time is divided into two parts: the gap between the launching of phishing attacks and the detection of a phishing website and the time delay between detecting a phishing website and its blacklisting across the browsers.
 Although Browser-based anti-phishing is carried on in the first part, the client-side scorer's result affects the server-side classifier result. Even though it has a greater effect on the \textit{occurrence} rather than the timeliness of blacklisting, it still affects the \textit{timeliness} of blacklisting indirectly. 
@@ -39,5 +39,5 @@ operators to submit false reports or attempt to access profile crawling infrastr
 
 \subsection{Disclosures}
 
-We sent our findings in a report to Google with focus on inefficiency of client-side classifier and gaps in blacklisting on mobile devices. 
+We sent our findings in a report to Google with a focus on the inefficiency of client-side classifier and gaps in blacklisting on mobile devices. 
 %explain the further google actions
